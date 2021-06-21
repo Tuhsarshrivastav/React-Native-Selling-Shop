@@ -2,6 +2,8 @@ apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
 
+
+
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -83,6 +85,7 @@ project.ext.react = [
 
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply plugin: 'com.google.gms.google-services'
 
 
 /**

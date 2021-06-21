@@ -1,7 +1,7 @@
 //import liraries
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
-import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
+import React from 'react';
+import {View, StyleSheet, FlatList} from 'react-native';
+import {Button, Card, Paragraph} from 'react-native-paper';
 // create a component
 const ListItemsScreen = () => {
   const items = [

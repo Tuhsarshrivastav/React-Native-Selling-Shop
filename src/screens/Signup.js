@@ -2,33 +2,43 @@ import React, {useState} from 'react';
 import {
   View,
   Text,
-  Image,
+  TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
 } from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
+import auth from '@react-native-firebase/auth';
 
-const SignupScreen = () => {
-  const [name, setName] = useState('');
+const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const userSignup = async () => {
+    if (!email || !password) {
+      alert('Please enter All the fields');
+      return;
+    }
+    try {
+      const result = await auth().createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+    } catch (error) {
+      alert('something wet wrong please try differnt password or email');
+    }
+  };
   return (
-    <KeyboardAvoidingView behavior="position" style={{paddingVertical: 20 ,justifyContent:'center'}}>
+    <KeyboardAvoidingView
+      behavior="position"
+      style={{paddingVertical: 20, justifyContent: 'center'}}>
       <View style={styles.box1}>
-        <Text style={styles.text}>Please Signup To Continue!</Text>
+        <Text style={styles.text}>Signup</Text>
       </View>
       <View style={styles.box2}>
-        <TextInput
-          label="Name"
-          value={name}
-          mode="outlined"
-          onChangeText={text => setName(text)}
-        />
         <TextInput
           label="Email"
           value={email}
           mode="outlined"
-          secureTextEntry={true}
           onChangeText={text => setEmail(text)}
           style={{marginTop: 15}}
         />
@@ -40,9 +50,19 @@ const SignupScreen = () => {
           onChangeText={text => setPassword(text)}
           style={{marginTop: 15}}
         />
-        <Button style={{marginTop: 15}} mode="contained">
-          Signup
-        </Button>
+        <TouchableOpacity>
+          <Button
+            onPress={() => userSignup()}
+            style={{marginTop: 15}}
+            mode="contained">
+            Signup
+          </Button>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{marginTop: 15}}
+          onPress={() => navigation.navigate('login')}>
+          <Text style={{textAlign: 'center'}}>Already Have an account?</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );

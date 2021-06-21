@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "693994280557",
+    "project_id": "selling-app-deeb1",
+    "storage_bucket": "selling-app-deeb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693994280557:android:095109dd670606d4d19164",
+        "android_client_info": {
+          "package_name": "com.sellingshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693994280557-vkc2a2cnljq6kdtca7vghj5pgcv5ic3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNUqRlJOQ3M_mwTlokAP5R9lr-DQag-wE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693994280557-vkc2a2cnljq6kdtca7vghj5pgcv5ic3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
