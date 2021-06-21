@@ -8,22 +8,29 @@ import {
 } from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 
-const LoginScreen = () => {
+const SignupScreen = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
-    <KeyboardAvoidingView
-      behavior="position"
-      style={{paddingVertical: 30, justifyContent: 'center'}}>
+    <KeyboardAvoidingView behavior="position" style={{paddingVertical: 20 ,justifyContent:'center'}}>
       <View style={styles.box1}>
-        <Text style={styles.text}>Please Login To Continue!</Text>
+        <Text style={styles.text}>Please Signup To Continue!</Text>
       </View>
       <View style={styles.box2}>
+        <TextInput
+          label="Name"
+          value={name}
+          mode="outlined"
+          onChangeText={text => setName(text)}
+        />
         <TextInput
           label="Email"
           value={email}
           mode="outlined"
+          secureTextEntry={true}
           onChangeText={text => setEmail(text)}
+          style={{marginTop: 15}}
         />
         <TextInput
           label="Password"
@@ -34,7 +41,7 @@ const LoginScreen = () => {
           style={{marginTop: 15}}
         />
         <Button style={{marginTop: 15}} mode="contained">
-          Login
+          Signup
         </Button>
       </View>
     </KeyboardAvoidingView>
@@ -50,7 +57,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 22,
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
 });
-export default LoginScreen;
+export default SignupScreen;
