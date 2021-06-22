@@ -7,7 +7,10 @@ import ListItemsScreen from './screens/ListItemsScreen';
 import AcountScreen from './screens/AcountScreen';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme as NavTheme,
+} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Feather from 'react-native-vector-icons/Feather';
@@ -21,6 +24,14 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: 'deepskyblue',
+  },
+};
+const mytheme = {
+  ...NavTheme,
+  roundness: 2,
+  colors: {
+    ...NavTheme.colors,
+    background: '#fff',
   },
 };
 const TabNavigator = () => {
@@ -88,16 +99,17 @@ const AuthNavigator = () => {
 const Navigation = () => {
   const [user, setUser] = useState('');
   useEffect(() => {
-    auth().onAuthStateChanged(userExist => {
+    const unsubcribe = auth().onAuthStateChanged(userExist => {
       if (userExist) {
         setUser(userExist);
       } else {
         setUser('');
       }
     });
+    return unsubcribe;
   }, []);
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={mytheme}>
       {user ? <TabNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );

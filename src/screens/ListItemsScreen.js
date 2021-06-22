@@ -1,19 +1,34 @@
 //import liraries
-import React from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, FlatList, Linking, Platform} from 'react-native';
 import {Button, Card, Paragraph} from 'react-native-paper';
+import firestore from '@react-native-firebase/firestore';
+
 // create a component
 const ListItemsScreen = () => {
-  const items = [
-    {
-      name: 'R1',
-      year: '2020',
-      phone: '123456789',
-      image:
-        'https://news.maxabout.com/wp-content/uploads/2019/07/2020-Yamaha-R1-Blue.jpg',
-      desc: 'world 1st crossplain engine bike',
-    },
-  ];
+  const [Myitems, SetItems] = useState([]);
+
+  const openDial = phone => {
+    if (Platform.OS === 'android') {
+      Linking.openURL(`tel:${phone}`);
+    } else {
+      Linking.openURL(`telprompt:{phone}`);
+    }
+  };
+  const getDetails = async () => {
+    try {
+      const querry = await firestore().collection('ads').get();
+      const result = querry.docs.map(docSnap => docSnap.data());
+      SetItems(result);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getDetails();
+    return () => {
+      console.log('cleanUp');
+    };
+  }, []);
 
   const renderItem = item => {
     return (
@@ -25,8 +40,8 @@ const ListItemsScreen = () => {
         </Card.Content>
         <Card.Cover source={{uri: item.image}} />
         <Card.Actions>
-          <Button>200</Button>
-          <Button>Call seller</Button>
+          <Button>{item.price}</Button>
+          <Button onPress={() => openDial()}>Call seller</Button>
         </Card.Actions>
       </Card>
     );
@@ -34,9 +49,10 @@ const ListItemsScreen = () => {
   return (
     <View>
       <FlatList
-        data={items}
+        data={Myitems}
         keyExtractor={item => item.phone}
         renderItem={({item}) => renderItem(item)}
+        inverted
       />
     </View>
   );

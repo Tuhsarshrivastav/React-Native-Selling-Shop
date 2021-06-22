@@ -5,8 +5,8 @@ import {Button} from 'react-native-paper';
 
 const AcountScreen = () => {
   return (
-    <View>
-      <Text>{auth().currentUser.email}</Text>
+    <View style={{alignItems: 'center', height: '100%',justifyContent:'center'}}>
+      <Text style={{fontSize: 22}}>{auth().currentUser.email}</Text>
       <Button
         onPress={() => auth().signOut()}
         style={{marginTop: 15}}
